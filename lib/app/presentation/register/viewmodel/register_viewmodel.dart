@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sanaliracase/app/presentation/bank_list/screen/bank_list.dart';
+import 'package:sanaliracase/core/navigation/navigation_helper.dart';
 
 part 'register_viewmodel.g.dart';
 
@@ -61,7 +63,7 @@ abstract class _RegisterViewModelBase with Store {
     if (formKey.currentState != null &&
         formKey.currentState!.validate() &&
         isSelected == true) {
-      print("OK");
+      await Navigation.push(page: BankList());
     } else {
       print('No');
     }
