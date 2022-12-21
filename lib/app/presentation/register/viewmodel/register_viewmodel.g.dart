@@ -73,6 +73,22 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
     });
   }
 
+  late final _$numberControllerAtom =
+      Atom(name: '_RegisterViewModelBase.numberController', context: context);
+
+  @override
+  TextEditingController? get numberController {
+    _$numberControllerAtom.reportRead();
+    return super.numberController;
+  }
+
+  @override
+  set numberController(TextEditingController? value) {
+    _$numberControllerAtom.reportWrite(value, super.numberController, () {
+      super.numberController = value;
+    });
+  }
+
   late final _$_RegisterViewModelBaseActionController =
       ActionController(name: '_RegisterViewModelBase', context: context);
 
@@ -115,7 +131,8 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
 formKey: ${formKey},
 nameController: ${nameController},
 lastNameController: ${lastNameController},
-emailController: ${emailController}
+emailController: ${emailController},
+numberController: ${numberController}
     ''';
   }
 }

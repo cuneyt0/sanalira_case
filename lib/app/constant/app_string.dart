@@ -1,6 +1,7 @@
-const sanaLira = "SanaLira'ya";
-const yeniUyelik = ' Yeni Üyelik';
-const name = 'Ad';
-const sozlesmeImzala = 'Bilgilerinizi Girip Sözleşmeyi Onaylayın';
-const lastName = 'Soyad';
-const email = 'Email';
+const sanaLiraText = "SanaLira'ya";
+const yeniUyelikText = ' Yeni Üyelik';
+const nameText = 'Ad';
+const sozlesmeImzalaText = 'Bilgilerinizi Girip Sözleşmeyi Onaylayın';
+const lastNameText = 'Soyad';
+const emailText = 'E-Posta';
+const numberText = 'Cep Telefonu Numaranız';

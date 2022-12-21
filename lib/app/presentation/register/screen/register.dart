@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sanaliracase/app/constant/app_string.dart';
 import 'package:sanaliracase/app/getIt/get_it.dart';
+import 'package:sanaliracase/app/presentation/component/text_component.dart';
 import 'package:sanaliracase/app/presentation/register/viewmodel/register_viewmodel.dart';
 import 'package:sanaliracase/core/screen_size/screen_size_helper.dart';
 import 'package:sanaliracase/gen/assets.gen.dart';
@@ -73,13 +74,11 @@ class Register extends StatelessWidget {
                           child: Column(
                             children: [
                               ListTile(
-                                title: Text(
-                                  name,
-                                  style: TextStyle(
-                                      color: ColorName.lightSilver,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300),
-                                ),
+                                title: TextComponent(
+                                    data: nameText,
+                                    color: ColorName.lightSilver,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300),
                                 subtitle: Observer(
                                   builder: (context) {
                                     return _nameAndLastNameField(
@@ -88,13 +87,11 @@ class Register extends StatelessWidget {
                                 ),
                               ),
                               ListTile(
-                                title: Text(
-                                  lastName,
-                                  style: TextStyle(
-                                      color: ColorName.lightSilver,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300),
-                                ),
+                                title: TextComponent(
+                                    data: lastNameText,
+                                    color: ColorName.lightSilver,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300),
                                 subtitle: Observer(
                                   builder: (context) {
                                     return _nameAndLastNameField(_viewModel,
@@ -103,13 +100,11 @@ class Register extends StatelessWidget {
                                 ),
                               ),
                               ListTile(
-                                title: Text(
-                                  email,
-                                  style: TextStyle(
-                                      color: ColorName.lightSilver,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300),
-                                ),
+                                title: TextComponent(
+                                    data: emailText,
+                                    color: ColorName.lightSilver,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300),
                                 subtitle: Observer(
                                   builder: (context) {
                                     return _emailField(_viewModel);
@@ -117,27 +112,11 @@ class Register extends StatelessWidget {
                                 ),
                               ),
                               ListTile(
-                                title: Text(
-                                  email,
-                                  style: TextStyle(
-                                      color: ColorName.lightSilver,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                                subtitle: Observer(
-                                  builder: (context) {
-                                    return _emailField(_viewModel);
-                                  },
-                                ),
-                              ),
-                              ListTile(
-                                title: Text(
-                                  'Cep Telefonu Numaranız',
-                                  style: TextStyle(
-                                      color: ColorName.lightSilver,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300),
-                                ),
+                                title: TextComponent(
+                                    data: numberText,
+                                    color: ColorName.lightSilver,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300),
                                 subtitle: Observer(
                                   builder: (context) {
                                     return _phoneField(_viewModel);
@@ -231,51 +210,22 @@ Padding _membershipText() {
       children: [
         Row(
           children: [
-            Text(
-              sanaLira,
-              style: TextStyle(
-                color: ColorName.mediumSeaGreen,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+            TextComponent(
+              data: sanaLiraText,
+              color: ColorName.mediumSeaGreen,
+              fontWeight: FontWeight.bold,
             ),
-            Text(
-              yeniUyelik,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-              ),
-            )
+            TextComponent(
+              data: yeniUyelikText,
+            ),
           ],
         ),
-        Text(
-          sozlesmeImzala,
-          style: TextStyle(
-            color: ColorName.lightSilver,
-            fontSize: 12,
-          ),
+        TextComponent(
+          data: sozlesmeImzalaText,
+          color: ColorName.lightSilver,
+          fontSize: 12,
         ),
       ],
     ),
   );
 }
-
-
-/**
- * 
- * Expanded(
-                      child: Observer(builder: (context) {
-                        return ElevatedButton(
-                          child: Text('Kaydet'),
-                          onPressed: (() {
-                            if (_viewModel.formKey.currentState != null &&
-                                _viewModel.formKey.currentState!.validate()) {
-                              print("OK");
-                            } else {
-                              print('No');
-                            }
-                          }),
-                        );
-                      }),
-                    ),
- */
