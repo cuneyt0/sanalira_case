@@ -114,7 +114,7 @@ class NetworkManager extends INetworkManager {
 
   @override
   INetworkManager addInterceptor() {
-    _dio?.interceptors.add(InterceptorsWrapper(onRequest: (request, handler) {
+    _dio.interceptors.add(InterceptorsWrapper(onRequest: (request, handler) {
       request.headers['Authorization'] = 'Bearer $setToken';
       request.headers['Accept'] = 'application/json, text/plain, */*';
       request.headers['Content-Type'] = 'application/json';
@@ -143,7 +143,7 @@ class NetworkManager extends INetworkManager {
       {bool? isDecoded}) async {
     if (await NetworkConnectivity.status) {
       try {
-        final response = await _dio!.fetch(RequestOptions(
+        final response = await _dio.fetch(RequestOptions(
           baseUrl: apiReleaseMode == true ? _baseURLRelease : _baseURLDebug,
           path: _path ?? '',
           data: _formData ?? _body,
@@ -206,7 +206,7 @@ class NetworkManager extends INetworkManager {
   Future<Result<Response, NetworkError>> executeToResponseData() async {
     if (await NetworkConnectivity.status) {
       try {
-        final response = await _dio!.fetch(RequestOptions(
+        final response = await _dio.fetch(RequestOptions(
           baseUrl: apiReleaseMode == true ? _baseURLRelease : _baseURLDebug,
           path: _path ?? '',
           data: _body,
@@ -268,7 +268,7 @@ class NetworkManager extends INetworkManager {
       final appStorage = await getApplicationDocumentsDirectory();
       final file = File('${appStorage.path}/${DateTime.now().toString()}');
       print(file.path);
-      final response = await _dio!.download(
+      final response = await _dio.download(
           (apiReleaseMode == true ? _baseURLRelease : _baseURLDebug)! + _path!,
           file.path);
       // ignore: avoid_print
