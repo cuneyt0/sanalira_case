@@ -89,6 +89,22 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
     });
   }
 
+  late final _$isSelectedAtom =
+      Atom(name: '_RegisterViewModelBase.isSelected', context: context);
+
+  @override
+  bool? get isSelected {
+    _$isSelectedAtom.reportRead();
+    return super.isSelected;
+  }
+
+  @override
+  set isSelected(bool? value) {
+    _$isSelectedAtom.reportWrite(value, super.isSelected, () {
+      super.isSelected = value;
+    });
+  }
+
   late final _$_RegisterViewModelBaseActionController =
       ActionController(name: '_RegisterViewModelBase', context: context);
 
@@ -132,7 +148,8 @@ formKey: ${formKey},
 nameController: ${nameController},
 lastNameController: ${lastNameController},
 emailController: ${emailController},
-numberController: ${numberController}
+numberController: ${numberController},
+isSelected: ${isSelected}
     ''';
   }
 }

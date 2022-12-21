@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -126,6 +127,74 @@ class Register extends StatelessWidget {
                                   },
                                 ),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Observer(builder: (context) {
+                                          return ElevatedButton.icon(
+                                              style: ElevatedButton.styleFrom(
+                                                padding: EdgeInsets.all(10),
+                                                backgroundColor: Colors.white,
+                                              ),
+                                              onPressed: (() {
+                                                if (_viewModel.isSelected ==
+                                                    false) {
+                                                  _viewModel.isSelected = true;
+                                                } else {
+                                                  _viewModel.isSelected = false;
+                                                }
+                                              }),
+                                              label: Text(''),
+                                              icon:
+                                                  _viewModel.isSelected == false
+                                                      ? Image.asset(
+                                                          Assets.icons.rectangle
+                                                              .keyName,
+                                                          width: 24,
+                                                          fit: BoxFit.fill,
+                                                        )
+                                                      : Icon(
+                                                          Icons.done,
+                                                          color: Colors.blue,
+                                                        ));
+                                        }),
+                                        RichText(
+                                            text: TextSpan(children: [
+                                          TextSpan(
+                                              text: 'Hesabınızı olustururken ',
+                                              style: TextStyle(
+                                                  color: Colors.black)),
+                                          TextSpan(text: ' '),
+                                          TextSpan(
+                                              text: 'sözleşme ve koşulları\n',
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () async {
+                                                  //Bakılacak.
+                                                  /* var url =
+                                                      'https://www.google.com/';
+                                                  if (await canLaunch(url)) {
+                                                    await launch(url);
+                                                  } else {
+                                                    throw 'Sayfa geçersiz';
+                                                  }*/
+                                                },
+                                              style: TextStyle(
+                                                color: ColorName.mediumSeaGreen,
+                                              )),
+                                          TextSpan(
+                                              text:
+                                                  'kabul etmeniz gerekmektedir.',
+                                              style: TextStyle(
+                                                  color: Colors.black))
+                                        ])),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -140,6 +209,22 @@ class Register extends StatelessWidget {
       ),
     );
   }
+
+  /**
+   * 
+   * IconButton(
+                                        color: Colors.blue,
+                                        onPressed: (() {
+                                          if (_viewModel.isSelected == false) {
+                                            _viewModel.isSelected = true;
+                                          } else {
+                                            _viewModel.isSelected = false;
+                                          }
+                                        }),
+                                        icon: _viewModel.isSelected == false
+                                            ? Icon(Icons.delete)
+                                            : Icon(Icons.done));
+   */
 
   IntlPhoneField _phoneField(RegisterViewModel _viewModel) {
     return IntlPhoneField(

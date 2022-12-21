@@ -16,6 +16,14 @@ class $AssetsColorGen {
   String get colors => 'assets/color/colors.xml';
 }
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/Rectangle.png
+  AssetGenImage get rectangle =>
+      const AssetGenImage('assets/icons/Rectangle.png');
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -27,6 +35,7 @@ class Assets {
   Assets._();
 
   static const $AssetsColorGen color = $AssetsColorGen();
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
