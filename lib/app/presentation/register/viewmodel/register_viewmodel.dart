@@ -15,6 +15,8 @@ abstract class _RegisterViewModelBase with Store {
   TextEditingController? lastNameController = TextEditingController();
   @observable
   TextEditingController? emailController = TextEditingController();
+  @observable
+  TextEditingController? numberController = TextEditingController();
 
   @action
   String? nameAndLastNameValidation(String value) {
