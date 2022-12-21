@@ -74,11 +74,14 @@ class Register extends StatelessWidget {
                           child: Column(
                             children: [
                               ListTile(
-                                title: TextComponent(
-                                    data: nameText,
-                                    color: ColorName.lightSilver,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300),
+                                title: Padding(
+                                  padding: const EdgeInsets.only(top: 13),
+                                  child: TextComponent(
+                                      data: nameText,
+                                      color: ColorName.lightSilver,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300),
+                                ),
                                 subtitle: Observer(
                                   builder: (context) {
                                     return _nameAndLastNameField(
@@ -203,7 +206,7 @@ TextFormField _nameAndLastNameField(
 
 Padding _membershipText() {
   return Padding(
-    padding: const EdgeInsets.only(left: 20, top: 20),
+    padding: const EdgeInsets.only(left: 15, top: 41),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,10 +223,13 @@ Padding _membershipText() {
             ),
           ],
         ),
-        TextComponent(
-          data: sozlesmeImzalaText,
-          color: ColorName.lightSilver,
-          fontSize: 12,
+        Padding(
+          padding: const EdgeInsets.only(top: 5),
+          child: TextComponent(
+            data: sozlesmeImzalaText,
+            color: ColorName.lightSilver,
+            fontSize: 12,
+          ),
         ),
       ],
     ),
