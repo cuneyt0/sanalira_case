@@ -3,6 +3,7 @@ import 'package:sanaliracase/app/getIt/get_it.dart';
 import 'package:sanaliracase/app/presentation/register/screen/register.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupGetIT();
   runApp(const MyApp());
 }

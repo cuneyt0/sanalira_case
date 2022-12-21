@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <color name="mediumSeaGreen">#4DAE5E</color>
+<color name="antiFlashWhite">#F3F4F6</color>
+<color name="lightSilver">#CFD4DE</color>
+
 
 
 </resources>
