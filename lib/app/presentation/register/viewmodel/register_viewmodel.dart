@@ -55,4 +55,15 @@ abstract class _RegisterViewModelBase with Store {
       return null;
     }
   }
+
+  @action
+  Future<void> login() async {
+    if (formKey.currentState != null &&
+        formKey.currentState!.validate() &&
+        isSelected == true) {
+      print("OK");
+    } else {
+      print('No');
+    }
+  }
 }

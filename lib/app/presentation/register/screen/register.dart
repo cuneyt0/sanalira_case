@@ -17,16 +17,6 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     final RegisterViewModel _viewModel = getIt.get<RegisterViewModel>();
     return Scaffold(
-      floatingActionButton: Observer(builder: (context) {
-        return FloatingActionButton(onPressed: () {
-          if (_viewModel.formKey.currentState != null &&
-              _viewModel.formKey.currentState!.validate()) {
-            print("OK");
-          } else {
-            print('No');
-          }
-        });
-      }),
       backgroundColor: ColorName.mediumSeaGreen,
       body: Container(
         color: ColorName.mediumSeaGreen,
@@ -131,6 +121,10 @@ class Register extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 15.0),
                                 child: _contractText(_viewModel),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 50.0),
+                                child: _loginButton(_viewModel),
+                              ),
                             ],
                           ),
                         );
@@ -144,6 +138,26 @@ class Register extends StatelessWidget {
         ]),
       ),
     );
+  }
+
+  Observer _loginButton(RegisterViewModel _viewModel) {
+    return Observer(builder: (context) {
+      return SizedBox(
+        width: context.screenWidht(width: .9),
+        height: context.screenHeight(height: .06),
+        child: ElevatedButton(
+          child: TextComponent(
+            data: login,
+            color: ColorName.white,
+            fontWeight: FontWeight.bold,
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ColorName.iguanaGreen,
+          ),
+          onPressed: () => _viewModel.login(),
+        ),
+      );
+    });
   }
 
   Column _contractText(RegisterViewModel _viewModel) {
@@ -177,31 +191,34 @@ class Register extends StatelessWidget {
                         ));
             }),
             RichText(
-                text: TextSpan(children: [
-              TextSpan(
-                  text: 'Hesabınızı olustururken ',
-                  style: TextStyle(color: ColorName.darkGunmetal)),
-              TextSpan(text: ' '),
-              TextSpan(
-                  text: 'sözleşme ve koşulları\n',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () async {
-                      //Bakılacak.
-                      /* var url =
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                      text: 'Hesabınızı olustururken ',
+                      style: TextStyle(color: ColorName.darkGunmetal)),
+                  TextSpan(text: ' '),
+                  TextSpan(
+                      text: 'sözleşme ve koşulları\n',
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          //Bakılacak.
+                          /* var url =
                                                     'https://www.google.com/';
                                                 if (await canLaunch(url)) {
                                                   await launch(url);
                                                 } else {
                                                   throw 'Sayfa geçersiz';
                                                 }*/
-                    },
-                  style: TextStyle(
-                      color: ColorName.iguanaGreen,
-                      fontWeight: FontWeight.bold)),
-              TextSpan(
-                  text: 'kabul etmeniz gerekmektedir.',
-                  style: TextStyle(color: ColorName.darkGunmetal))
-            ])),
+                        },
+                      style: TextStyle(
+                          color: ColorName.iguanaGreen,
+                          fontWeight: FontWeight.bold)),
+                  TextSpan(
+                      text: 'kabul etmeniz gerekmektedir.',
+                      style: TextStyle(color: ColorName.darkGunmetal))
+                ],
+              ),
+            ),
           ],
         ),
       ],

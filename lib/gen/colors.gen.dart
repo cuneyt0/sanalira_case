@@ -27,4 +27,7 @@ class ColorName {
 
   /// Color: #4DAE5E
   static const Color mediumSeaGreen = Color(0xFF4DAE5E);
+
+  /// Color: #FFFFFF
+  static const Color white = Color(0xFFFFFFFF);
 }

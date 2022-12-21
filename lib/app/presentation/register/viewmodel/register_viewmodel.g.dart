@@ -105,6 +105,14 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
     });
   }
 
+  late final _$loginAsyncAction =
+      AsyncAction('_RegisterViewModelBase.login', context: context);
+
+  @override
+  Future<void> login() {
+    return _$loginAsyncAction.run(() => super.login());
+  }
+
   late final _$_RegisterViewModelBaseActionController =
       ActionController(name: '_RegisterViewModelBase', context: context);
 
