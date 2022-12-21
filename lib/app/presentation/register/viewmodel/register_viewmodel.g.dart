@@ -41,6 +41,38 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
     });
   }
 
+  late final _$lastNameControllerAtom =
+      Atom(name: '_RegisterViewModelBase.lastNameController', context: context);
+
+  @override
+  TextEditingController? get lastNameController {
+    _$lastNameControllerAtom.reportRead();
+    return super.lastNameController;
+  }
+
+  @override
+  set lastNameController(TextEditingController? value) {
+    _$lastNameControllerAtom.reportWrite(value, super.lastNameController, () {
+      super.lastNameController = value;
+    });
+  }
+
+  late final _$emailControllerAtom =
+      Atom(name: '_RegisterViewModelBase.emailController', context: context);
+
+  @override
+  TextEditingController? get emailController {
+    _$emailControllerAtom.reportRead();
+    return super.emailController;
+  }
+
+  @override
+  set emailController(TextEditingController? value) {
+    _$emailControllerAtom.reportWrite(value, super.emailController, () {
+      super.emailController = value;
+    });
+  }
+
   late final _$_RegisterViewModelBaseActionController =
       ActionController(name: '_RegisterViewModelBase', context: context);
 
@@ -56,10 +88,34 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
   }
 
   @override
+  String? eMailValidation(String value) {
+    final _$actionInfo = _$_RegisterViewModelBaseActionController.startAction(
+        name: '_RegisterViewModelBase.eMailValidation');
+    try {
+      return super.eMailValidation(value);
+    } finally {
+      _$_RegisterViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String? validateEmail(String value) {
+    final _$actionInfo = _$_RegisterViewModelBaseActionController.startAction(
+        name: '_RegisterViewModelBase.validateEmail');
+    try {
+      return super.validateEmail(value);
+    } finally {
+      _$_RegisterViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 formKey: ${formKey},
-nameController: ${nameController}
+nameController: ${nameController},
+lastNameController: ${lastNameController},
+emailController: ${emailController}
     ''';
   }
 }
