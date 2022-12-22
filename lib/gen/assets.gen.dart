@@ -22,6 +22,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Rectangle.png
   AssetGenImage get rectangle =>
       const AssetGenImage('assets/icons/Rectangle.png');
+
+  /// File path: assets/icons/bell.png
+  AssetGenImage get bell => const AssetGenImage('assets/icons/bell.png');
+
+  /// File path: assets/icons/left-arrow.png
+  AssetGenImage get leftArrow =>
+      const AssetGenImage('assets/icons/left-arrow.png');
+
+  /// File path: assets/icons/settings.png
+  AssetGenImage get settings =>
+      const AssetGenImage('assets/icons/settings.png');
 }
 
 class $AssetsImagesGen {
