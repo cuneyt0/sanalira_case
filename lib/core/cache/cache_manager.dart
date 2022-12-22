@@ -21,7 +21,7 @@ class CacheManager {
     return prefs.getString(CacheManagerKey.LOGINRESPONSE.toString());
   }
 
-  Future<bool> removeAllData() async {
+  Future<bool> logout() async {
     final SharedPreferences prefs = await _prefs;
     prefs.remove(CacheManagerKey.LOGINRESPONSE.toString());
     return true;

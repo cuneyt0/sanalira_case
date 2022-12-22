@@ -2,7 +2,9 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:sanaliracase/app/data/local/model.dart/user_info.dart';
+import 'package:sanaliracase/app/getIt/get_it.dart';
 import 'package:sanaliracase/app/presentation/bank_list/screen/bank_list.dart';
+import 'package:sanaliracase/app/presentation/bank_list/view_model/bank_list_viewmodel.dart';
 import 'package:sanaliracase/core/cache/cache_manager.dart';
 import 'package:sanaliracase/core/navigation/navigation_helper.dart';
 import 'package:sanaliracase/core/results/result_state.dart';
@@ -14,6 +16,8 @@ class RegisterViewModel = _RegisterViewModelBase with _$RegisterViewModel;
 abstract class _RegisterViewModelBase with Store {
   @observable
   CacheManager? cacheManager = CacheManager();
+  @observable
+  final BankListViewModel _bankListViewModel = getIt.get<BankListViewModel>();
   @observable
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @observable
@@ -77,6 +81,7 @@ abstract class _RegisterViewModelBase with Store {
       email: emailController?.text,
       number: numberController?.text,
     ));
+    await _bankListViewModel.getAssignment();
 
     await Navigation.push(page: BankList());
   }
@@ -87,8 +92,6 @@ abstract class _RegisterViewModelBase with Store {
         formKey.currentState!.validate() &&
         isSelected == true) {
       await saveUser();
-    } else {
-      print('No');
-    }
+    } else {}
   }
 }

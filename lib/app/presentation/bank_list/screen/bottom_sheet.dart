@@ -3,7 +3,7 @@ import 'package:sanaliracase/app/constant/app_string.dart';
 import 'package:sanaliracase/app/data/remote/bank_list/model/data_model.dart';
 import 'package:sanaliracase/app/getIt/get_it.dart';
 import 'package:sanaliracase/app/presentation/bank_list/view_model/bank_list_viewmodel.dart';
-import 'package:sanaliracase/app/presentation/component/text_component.dart';
+import 'package:sanaliracase/app/presentation/component/text/text_component.dart';
 import 'package:sanaliracase/core/copy_clipboard/copy_clipboard.dart';
 import 'package:sanaliracase/core/screen_size/screen_size_helper.dart';
 import 'package:sanaliracase/gen/colors.gen.dart';

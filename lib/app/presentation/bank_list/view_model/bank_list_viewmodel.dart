@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:sanaliracase/app/data/remote/bank_list/model/bank_info.dart';
 import 'package:sanaliracase/app/data/repository/bank_list/i_bank_repository.dart';
+import 'package:sanaliracase/core/cache/cache_manager.dart';
 import 'package:sanaliracase/core/results/result_state.dart';
 import 'package:sanaliracase/gen/assets.gen.dart';
 
@@ -16,6 +17,9 @@ abstract class _BankListViewModelBase with Store {
   @observable
   ResultState<BankInfo> asignmentResultState = const ResultState.initial();
   @observable
+  @observable
+  CacheManager? cacheManager = CacheManager();
+  @observable
   int currentIndex = 0;
   @observable
   List<String>? images = [
@@ -27,6 +31,11 @@ abstract class _BankListViewModelBase with Store {
     Assets.images.vakifbankLogo.keyName,
     Assets.images.vakifbankLogo.path,
   ];
+
+  @action
+  Future<void> logout() async {
+    cacheManager?.logout();
+  }
 
   Future<void> getAssignment() async {
     await Future.delayed(const Duration(milliseconds: 1000));

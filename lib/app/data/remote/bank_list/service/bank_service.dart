@@ -13,7 +13,7 @@ class BankService extends IBankService {
         .setPath('/assignment')
         .setFunctionName(funcName: 'getAssignment')
         .execute<BankInfo, BankInfo>(BankInfo());
-    print(response);
+
     return response;
   }
 }

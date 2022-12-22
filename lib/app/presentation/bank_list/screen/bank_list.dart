@@ -5,8 +5,8 @@ import 'package:sanaliracase/app/data/remote/bank_list/model/bank_info.dart';
 import 'package:sanaliracase/app/getIt/get_it.dart';
 import 'package:sanaliracase/app/presentation/bank_list/screen/bottom_sheet.dart';
 import 'package:sanaliracase/app/presentation/bank_list/view_model/bank_list_viewmodel.dart';
-import 'package:sanaliracase/app/presentation/component/text_component.dart';
-import 'package:sanaliracase/app/presentation/register/screen/register.dart';
+import 'package:sanaliracase/app/presentation/component/text/text_component.dart';
+import 'package:sanaliracase/app/presentation/splash/screen/splash.dart';
 import 'package:sanaliracase/core/screen_size/screen_size_helper.dart';
 import 'package:sanaliracase/gen/assets.gen.dart';
 import 'package:sanaliracase/gen/colors.gen.dart';
@@ -35,68 +35,79 @@ class BankList extends StatelessWidget {
   }
 
   Observer _bottomNavigationBar(BankListViewModel _viewmodel) {
-    return Observer(builder: (context) {
-      return BottomNavigationBar(
+    return Observer(
+      builder: (context) {
+        return BottomNavigationBar(
           currentIndex: _viewmodel.currentIndex,
           onTap: (index) => _viewmodel.currentIndex = index,
-          items: [
-            BottomNavigationBarItem(
-                label: '',
-                icon: Icon(
-                  Icons.home,
-                  color: _viewmodel.currentIndex == 0
-                      ? Colors.blue
-                      : ColorName.lightSilver,
-                )),
-            BottomNavigationBarItem(
-                label: '',
-                icon: Image.asset(Assets.icons.transaction.keyName,
-                    width: 20,
-                    height: 20,
-                    color: _viewmodel.currentIndex == 1
-                        ? Colors.blue
-                        : ColorName.lightSilver)),
-            BottomNavigationBarItem(
-                label: '',
-                icon: Container(
-                  height: context.screenHeight(height: .04),
-                  width: context.screenWidht(width: .1),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _viewmodel.currentIndex == 2
-                        ? ColorName.white
-                        : ColorName.darkGunmetal,
-                  ),
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    Assets.icons.layer.keyName,
-                    color: _viewmodel.currentIndex == 2
-                        ? Colors.blue
-                        : ColorName.white,
-                    fit: BoxFit.contain,
-                    width: context.screenWidht(width: .05),
-                  ),
-                )),
-            BottomNavigationBarItem(
-                label: '',
-                icon: Icon(Icons.credit_card_sharp,
-                    color: _viewmodel.currentIndex == 3
-                        ? Colors.blue
-                        : ColorName.lightSilver)),
-            BottomNavigationBarItem(
-                label: '',
-                icon: Icon(Icons.person_outline,
-                    color: _viewmodel.currentIndex == 4
-                        ? Colors.blue
-                        : ColorName.lightSilver)),
-          ]);
-    });
+          items: _bottomNavigationBarItems(_viewmodel, context),
+        );
+      },
+    );
+  }
+
+  List<BottomNavigationBarItem> _bottomNavigationBarItems(
+      BankListViewModel _viewmodel, BuildContext context) {
+    return [
+      BottomNavigationBarItem(
+        label: '',
+        icon: Icon(
+          Icons.home,
+          color: _viewmodel.currentIndex == 0
+              ? Colors.blue
+              : ColorName.lightSilver,
+        ),
+      ),
+      BottomNavigationBarItem(
+        label: '',
+        icon: Image.asset(Assets.icons.transaction.keyName,
+            width: 20,
+            height: 20,
+            color: _viewmodel.currentIndex == 1
+                ? Colors.blue
+                : ColorName.lightSilver),
+      ),
+      BottomNavigationBarItem(
+        label: '',
+        icon: Container(
+          height: context.screenHeight(height: .04),
+          width: context.screenWidht(width: .1),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: _viewmodel.currentIndex == 2
+                ? ColorName.white
+                : ColorName.darkGunmetal,
+          ),
+          alignment: Alignment.center,
+          child: Image.asset(
+            Assets.icons.layer.keyName,
+            color: _viewmodel.currentIndex == 2 ? Colors.blue : ColorName.white,
+            fit: BoxFit.contain,
+            width: context.screenWidht(width: .05),
+          ),
+        ),
+      ),
+      BottomNavigationBarItem(
+        label: '',
+        icon: Icon(Icons.credit_card_sharp,
+            color: _viewmodel.currentIndex == 3
+                ? Colors.blue
+                : ColorName.lightSilver),
+      ),
+      BottomNavigationBarItem(
+        label: '',
+        icon: Icon(Icons.person_outline,
+            color: _viewmodel.currentIndex == 4
+                ? Colors.blue
+                : ColorName.lightSilver),
+      ),
+    ];
   }
 
   List<Widget> _infoList(
           {BuildContext? context, BankListViewModel? viewModel}) =>
       [
-        _buttons(context!),
+        _buttons(context: context!, viewModel: viewModel),
         _userAccountMoney(),
         _liraText(),
         SizedBox(
@@ -208,18 +219,23 @@ class BankList extends StatelessWidget {
     );
   }
 
-  Row _buttons(BuildContext context) {
+  Row _buttons({
+    required BuildContext context,
+    required BankListViewModel? viewModel,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _iconButton(
-          context: context,
-          name: Assets.icons.leftArrow.keyName,
-          onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => Register()),
-            (Route<dynamic> route) => false,
-          ),
-        ),
+            context: context,
+            name: Assets.icons.leftArrow.keyName,
+            onPressed: () async {
+              viewModel?.logout();
+              await Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => Splash()),
+                (Route<dynamic> route) => false,
+              );
+            }),
         Row(
           children: [
             _iconButton(
@@ -245,26 +261,27 @@ class BankList extends StatelessWidget {
       {BuildContext? context, String? name, required void onPressed()}) {
     return SizedBox(
       height: context?.screenHeight(height: .05),
-      width: context?.screenWidht(width: .11),
+      width: context?.screenWidht(width: .13),
       child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(10),
-            backgroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-          ),
-          onPressed: onPressed,
-          label: Text(''),
-          icon: Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: Center(
-              child: Image.asset(
-                '${name}',
-                width: 14,
-                fit: BoxFit.contain,
-              ),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(10),
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        ),
+        onPressed: onPressed,
+        label: Text(''),
+        icon: Padding(
+          padding: const EdgeInsets.only(left: 5.0),
+          child: Center(
+            child: Image.asset(
+              '${name}',
+              width: 14,
+              fit: BoxFit.contain,
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

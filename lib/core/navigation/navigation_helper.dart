@@ -24,5 +24,4 @@ class Navigation {
 
   static MaterialPageRoute<T> materialPageRoute<T>(Widget page) =>
       MaterialPageRoute(builder: (context) => page);
-      
 }

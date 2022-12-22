@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sanaliracase/app/routes/routes.dart';
+import 'package:sanaliracase/core/navigation/navigation_helper.dart';
 import 'package:sanaliracase/core/network/freezed/network_error.dart';
 import 'package:sanaliracase/core/network/freezed/result.dart';
 import 'package:sanaliracase/core/network/interface/base_response_type.dart';
@@ -164,7 +166,7 @@ class NetworkManager extends INetworkManager {
         // print('🍕 DATA $_setFunctionName : ${response.data}');
         // TODO: TEST ET,
         if (response.statusCode == 401) {
-          // await Navigation.pushAndRemoveAll(page: const LoginScreen());
+          await Navigation.pushNamedAndRemoveAll(root: Routes.register);
         }
         final decodeResponse = NetworkDecoding.decode<T, K>(
             response: response, responseType: responseModel);
@@ -175,8 +177,7 @@ class NetworkManager extends INetworkManager {
           print(' => ${NetworkError.request(error: diorError)}');
         }
         if (diorError.response?.statusCode == 401) {
-          //Login Ekranına Yönlendirilecek.
-          //  await _repo.logout();
+          await Navigation.pushNamedAndRemoveAll(root: Routes.register);
         }
 
         return Result.failure(NetworkError.request(error: diorError));
