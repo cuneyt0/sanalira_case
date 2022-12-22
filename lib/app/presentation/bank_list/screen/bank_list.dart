@@ -31,7 +31,18 @@ class BankList extends StatelessWidget {
   List<Widget> _infoList(
     BuildContext context,
   ) =>
-      [_buttons(context), _userAccountMoney()];
+      [
+        _buttons(context),
+        _userAccountMoney(),
+        _liraText(),
+      ];
+
+  TextComponent _liraText() {
+    return TextComponent(
+      data: 'Türk lirası yatırmak için banka seçiniz.',
+      color: ColorName.lightSilver,
+    );
+  }
 
   Card _userAccountMoney() {
     return Card(
