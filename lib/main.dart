@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sanaliracase/app/getIt/get_it.dart';
 import 'package:sanaliracase/app/presentation/splash/screen/splash.dart';
 import 'package:sanaliracase/app/routes/routes.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       navigatorKey: Navigation.navigationKey,
       onGenerateRoute: Routes.onGenerateRoutes,
+      builder: EasyLoading.init(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

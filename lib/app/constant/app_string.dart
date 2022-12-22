@@ -8,3 +8,10 @@ const numberText = 'Cep Telefonu Numaranız';
 const login = 'Giriş Yap';
 const kullaniciBulunamadi = 'Kullanıcı Bulunamadı';
 const tNotFound = 'Gösterilecek Sonuc Bulunamadı';
+const bankAccountName = 'Hesap Adı';
+const constantMessage =
+    'Lütfen havale yaparken açıklama alanına yukarıdaki kodu yazmayı unutmayın.';
+const infoMessage =
+    'Eksik bilgi girilmesi sebebiyle tutarın askıda kalması durumunda, ücret kesintisi yapılacaktır.';
+const description = 'Açıklama';
+const iban = 'IBAN';

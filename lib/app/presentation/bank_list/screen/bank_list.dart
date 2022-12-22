@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:sanaliracase/app/data/remote/bank_list/model/bank_info.dart';
 import 'package:sanaliracase/app/getIt/get_it.dart';
+import 'package:sanaliracase/app/presentation/bank_list/screen/bottom_sheet.dart';
 import 'package:sanaliracase/app/presentation/bank_list/view_model/bank_list_viewmodel.dart';
 import 'package:sanaliracase/app/presentation/component/text_component.dart';
 import 'package:sanaliracase/app/presentation/register/screen/register.dart';
@@ -71,6 +72,18 @@ class _BankListState extends State<BankList> {
       itemBuilder: ((context, index) {
         return Card(
           child: ListTile(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40.0),
+                          topRight: Radius.circular(40.0))),
+                  backgroundColor: Colors.white,
+                  builder: (context) => BottomSheetScreen(
+                        data: data?.data?[index],
+                      ));
+            },
             leading: DottedBorder(
               borderType: BorderType.RRect,
               radius: Radius.circular(5),

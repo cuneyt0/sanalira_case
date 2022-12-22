@@ -13,6 +13,15 @@ import 'package:flutter/material.dart';
 class ColorName {
   ColorName._();
 
+  /// Color: #BCC2CE
+  static const Color lavenderGray = Color(0xFFBCC2CE);
+
+  /// Color: #FFF6F6
+  static const Color snow = Color(0xFFFFF6F6);
+
+  /// Color: #F64949
+  static const Color tartOrange = Color(0xFFF64949);
+
   /// Color: #F3F4F6
   static const Color antiFlashWhite = Color(0xFFF3F4F6);
 
