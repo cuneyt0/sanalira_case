@@ -17,6 +17,7 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     final RegisterViewModel _viewModel = getIt.get<RegisterViewModel>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: ColorName.mediumSeaGreen,
       body: Container(
         color: ColorName.mediumSeaGreen,
@@ -24,7 +25,7 @@ class Register extends StatelessWidget {
         height: double.maxFinite,
         child: Stack(children: [
           Positioned(
-            top: 90,
+            top: 20,
             child: Container(
               width: context.screenWidht(width: 1),
               height: context.screenHeight(height: .2),
@@ -43,7 +44,7 @@ class Register extends StatelessWidget {
             bottom: -30,
             child: Container(
               width: context.screenWidht(width: 1),
-              height: context.screenHeight(height: .8),
+              height: context.screenHeight(height: .9),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -54,69 +55,89 @@ class Register extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
+                    flex: 1,
                     child: _membershipText(),
                   ),
                   Expanded(
-                    flex: 7,
+                    flex: 6,
                     child: Observer(
                       builder: (context) {
                         return Form(
                           key: _viewModel.formKey,
                           child: Column(
                             children: [
-                              ListTile(
-                                title: Padding(
-                                  padding: const EdgeInsets.only(top: 13),
-                                  child: TextComponent(
-                                      data: nameText,
+                              Expanded(
+                                child: ListTile(
+                                  title: Padding(
+                                    padding: const EdgeInsets.only(top: 0),
+                                    child: TextComponent(
+                                        data: nameText,
+                                        color: ColorName.lightSilver,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                  subtitle: Observer(
+                                    builder: (context) {
+                                      return _nameAndLastNameField(_viewModel,
+                                          _viewModel.nameController);
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: ListTile(
+                                  title: TextComponent(
+                                      data: lastNameText,
                                       color: ColorName.lightSilver,
-                                      fontSize: 12,
+                                      fontSize: 13,
                                       fontWeight: FontWeight.w300),
-                                ),
-                                subtitle: Observer(
-                                  builder: (context) {
-                                    return _nameAndLastNameField(
-                                        _viewModel, _viewModel.nameController);
-                                  },
-                                ),
-                              ),
-                              ListTile(
-                                title: TextComponent(
-                                    data: lastNameText,
-                                    color: ColorName.lightSilver,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300),
-                                subtitle: Observer(
-                                  builder: (context) {
-                                    return _nameAndLastNameField(_viewModel,
-                                        _viewModel.lastNameController);
-                                  },
+                                  subtitle: Observer(
+                                    builder: (context) {
+                                      return _nameAndLastNameField(_viewModel,
+                                          _viewModel.lastNameController);
+                                    },
+                                  ),
                                 ),
                               ),
-                              ListTile(
-                                title: TextComponent(
-                                    data: emailText,
-                                    color: ColorName.lightSilver,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300),
-                                subtitle: Observer(
-                                  builder: (context) {
-                                    return _emailField(_viewModel);
-                                  },
+                              Expanded(
+                                child: ListTile(
+                                  title: TextComponent(
+                                      data: emailText,
+                                      color: ColorName.lightSilver,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w300),
+                                  subtitle: Observer(
+                                    builder: (context) {
+                                      return _emailField(_viewModel);
+                                    },
+                                  ),
                                 ),
                               ),
-                              ListTile(
-                                title: TextComponent(
-                                    data: numberText,
-                                    color: ColorName.lightSilver,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300),
-                                subtitle: Observer(
-                                  builder: (context) {
-                                    return _phoneField(_viewModel);
-                                  },
+                              Expanded(
+                                child: ListTile(
+                                  title: TextComponent(
+                                      data: numberText,
+                                      color: ColorName.lightSilver,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w300),
+                                  subtitle: Observer(
+                                    builder: (context) {
+                                      return _phoneField(_viewModel);
+                                    },
+                                  ),
                                 ),
                               ),
+                              Expanded(
+                                flex: 3,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15.0, top: 30),
+                                  child: _contractText(_viewModel),
+                                ),
+                              ),
+                              /* 
+                             
+                              
                               Padding(
                                 padding: const EdgeInsets.only(left: 15.0),
                                 child: _contractText(_viewModel),
@@ -124,7 +145,7 @@ class Register extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 50.0),
                                 child: _loginButton(_viewModel),
-                              ),
+                              ),*/
                             ],
                           ),
                         );
@@ -163,63 +184,84 @@ class Register extends StatelessWidget {
   Column _contractText(RegisterViewModel _viewModel) {
     return Column(
       children: [
-        Row(
-          children: [
-            Observer(builder: (context) {
-              return ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(10),
-                    backgroundColor: Colors.white,
-                  ),
-                  onPressed: (() {
-                    if (_viewModel.isSelected == false) {
-                      _viewModel.isSelected = true;
-                    } else {
-                      _viewModel.isSelected = false;
-                    }
-                  }),
-                  label: Text(''),
-                  icon: _viewModel.isSelected == false
-                      ? Image.asset(
-                          Assets.icons.rectangle.keyName,
-                          width: 24,
-                          fit: BoxFit.fill,
-                        )
-                      : Icon(
-                          Icons.done,
-                          color: Colors.blue,
-                        ));
-            }),
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                      text: 'Hesabınızı olustururken ',
-                      style: TextStyle(color: ColorName.darkGunmetal)),
-                  TextSpan(text: ' '),
-                  TextSpan(
-                      text: 'sözleşme ve koşulları\n',
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          //Bakılacak.
-                          /* var url =
-                                                    'https://www.google.com/';
-                                                if (await canLaunch(url)) {
-                                                  await launch(url);
-                                                } else {
-                                                  throw 'Sayfa geçersiz';
-                                                }*/
-                        },
-                      style: TextStyle(
-                          color: ColorName.iguanaGreen,
-                          fontWeight: FontWeight.bold)),
-                  TextSpan(
-                      text: 'kabul etmeniz gerekmektedir.',
-                      style: TextStyle(color: ColorName.darkGunmetal))
-                ],
+        Flexible(
+          child: Row(
+            children: [
+              Flexible(
+                child: Observer(builder: (context) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 20,
+                      child: InkWell(
+                          onTap: () {
+                            if (_viewModel.isSelected == false) {
+                              _viewModel.isSelected = true;
+                            } else {
+                              _viewModel.isSelected = false;
+                            }
+                          },
+                          child: _viewModel.isSelected == false
+                              ? Image.asset(
+                                  Assets.icons.rectangle.keyName,
+                                  width: 24,
+                                  fit: BoxFit.fill,
+                                )
+                              : Icon(
+                                  Icons.done,
+                                  color: Colors.blue,
+                                )),
+                    ),
+                  );
+                }),
               ),
-            ),
-          ],
+              Flexible(
+                flex: 7,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                          text: 'Hesabınızı olustururken ',
+                          style: TextStyle(
+                            color: ColorName.darkGunmetal,
+                            fontSize: 12,
+                          )),
+                      TextSpan(text: ' '),
+                      TextSpan(
+                          text: 'sözleşme ve koşulları\n',
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () async {
+                              //Bakılacak.
+                              /* var url =
+                                                        'https://www.google.com/';
+                                                    if (await canLaunch(url)) {
+                                                      await launch(url);
+                                                    } else {
+                                                      throw 'Sayfa geçersiz';
+                                                    }*/
+                            },
+                          style: TextStyle(
+                              color: ColorName.iguanaGreen,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: 'kabul etmeniz gerekmektedir.',
+                          style: TextStyle(
+                            color: ColorName.darkGunmetal,
+                            fontSize: 12,
+                          ))
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: _loginButton(_viewModel),
+          ),
         ),
       ],
     );
@@ -319,3 +361,86 @@ Padding _membershipText() {
     ),
   );
 }
+/**
+ * 
+ * 
+ * 
+ *  Expanded(
+                    flex: 1,
+                    child: Observer(
+                      builder: (context) {
+                        return Form(
+                          key: _viewModel.formKey,
+                          child: Column(
+                            children: [
+                             
+                              
+                               ListTile(
+                                title: Padding(
+                                  padding: const EdgeInsets.only(top: 23),
+                                  child: TextComponent(
+                                      data: nameText,
+                                      color: ColorName.lightSilver,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                                subtitle: Observer(
+                                  builder: (context) {
+                                    return _nameAndLastNameField(
+                                        _viewModel, _viewModel.nameController);
+                                  },
+                                ),
+                              ),
+                              
+                                ListTile(
+                                title: TextComponent(
+                                    data: lastNameText,
+                                    color: ColorName.lightSilver,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300),
+                                subtitle: Observer(
+                                  builder: (context) {
+                                    return _nameAndLastNameField(_viewModel,
+                                        _viewModel.lastNameController);
+                                  },
+                                ),
+                              ),
+                               ListTile(
+                                title: TextComponent(
+                                    data: emailText,
+                                    color: ColorName.lightSilver,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300),
+                                subtitle: Observer(
+                                  builder: (context) {
+                                    return _emailField(_viewModel);
+                                  },
+                                ),
+                              ),
+                               ListTile(
+                                title: TextComponent(
+                                    data: numberText,
+                                    color: ColorName.lightSilver,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300),
+                                subtitle: Observer(
+                                  builder: (context) {
+                                    return _phoneField(_viewModel);
+                                  },
+                                ),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: _contractText(_viewModel),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 50.0),
+                                child: _loginButton(_viewModel),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+ */
