@@ -26,6 +26,22 @@ mixin _$BankListViewModel on _BankListViewModelBase, Store {
     });
   }
 
+  late final _$cacheManagerAtom =
+      Atom(name: '_BankListViewModelBase.cacheManager', context: context);
+
+  @override
+  CacheManager? get cacheManager {
+    _$cacheManagerAtom.reportRead();
+    return super.cacheManager;
+  }
+
+  @override
+  set cacheManager(CacheManager? value) {
+    _$cacheManagerAtom.reportWrite(value, super.cacheManager, () {
+      super.cacheManager = value;
+    });
+  }
+
   late final _$currentIndexAtom =
       Atom(name: '_BankListViewModelBase.currentIndex', context: context);
 
@@ -58,10 +74,19 @@ mixin _$BankListViewModel on _BankListViewModelBase, Store {
     });
   }
 
+  late final _$logoutAsyncAction =
+      AsyncAction('_BankListViewModelBase.logout', context: context);
+
+  @override
+  Future<void> logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
+  }
+
   @override
   String toString() {
     return '''
 asignmentResultState: ${asignmentResultState},
+cacheManager: ${cacheManager},
 currentIndex: ${currentIndex},
 images: ${images}
     ''';

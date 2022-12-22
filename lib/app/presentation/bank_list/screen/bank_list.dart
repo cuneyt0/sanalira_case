@@ -70,7 +70,7 @@ class BankList extends StatelessWidget {
       BottomNavigationBarItem(
         label: '',
         icon: Container(
-          height: context.screenHeight(height: .04),
+          height: context.screenHeight(height: .05),
           width: context.screenWidht(width: .1),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
