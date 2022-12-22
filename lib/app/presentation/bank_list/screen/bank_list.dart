@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:sanaliracase/app/data/remote/bank_list/model/bank_info.dart';
@@ -20,7 +21,6 @@ class _BankListState extends State<BankList> {
   final BankListViewModel _viewmodel = getIt.get<BankListViewModel>();
   @override
   void initState() {
-    _viewmodel.getAssignment();
     super.initState();
   }
 
@@ -67,22 +67,54 @@ class _BankListState extends State<BankList> {
     required BankListViewModel? viewModel,
   }) {
     return ListView.builder(
-        itemCount: data?.data?.length,
-        itemBuilder: ((context, index) {
-          return Card(
-            child: ListTile(
-              title: TextComponent(
-                data: data?.data?[index]?.bankName,
-              ),
-              subtitle: TextComponent(
-                data: 'Havale / EFT ile para gönderin.',
-                color: ColorName.lightSilver,
-              ),
+      itemCount: data?.data?.length,
+      itemBuilder: ((context, index) {
+        return Card(
+          child: ListTile(
+            leading: DottedBorder(
+              borderType: BorderType.RRect,
+              radius: Radius.circular(5),
+              dashPattern: [6, 6],
+              color: ColorName.lightSilver,
+              strokeWidth: 1,
+              child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: AssetImage(
+                          viewModel!.images![index],
+                        )),
+                  ),
+                  child: Text('')),
             ),
-          );
-        }));
+            title: TextComponent(
+              data: data?.data?[index]?.bankName,
+            ),
+            subtitle: TextComponent(
+              data: 'Havale / EFT ile para gönderin.',
+              color: ColorName.lightSilver,
+            ),
+          ),
+        );
+      }),
+    );
   }
 
+/**
+ * 
+ * : ClipRRect(
+                      child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Image.asset(
+                        viewModel!.images![index],
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ))
+ */
   TextComponent _liraText() {
     return TextComponent(
       data: 'Türk lirası yatırmak için banka seçiniz.',

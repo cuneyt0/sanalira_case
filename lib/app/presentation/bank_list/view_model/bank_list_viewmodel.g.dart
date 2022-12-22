@@ -26,10 +26,27 @@ mixin _$BankListViewModel on _BankListViewModelBase, Store {
     });
   }
 
+  late final _$imagesAtom =
+      Atom(name: '_BankListViewModelBase.images', context: context);
+
+  @override
+  List<String>? get images {
+    _$imagesAtom.reportRead();
+    return super.images;
+  }
+
+  @override
+  set images(List<String>? value) {
+    _$imagesAtom.reportWrite(value, super.images, () {
+      super.images = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-asignmentResultState: ${asignmentResultState}
+asignmentResultState: ${asignmentResultState},
+images: ${images}
     ''';
   }
 }
