@@ -15,12 +15,14 @@ class RegisterLogoWidget extends StatelessWidget {
       child: Container(
         width: context.screenWidht(width: 1),
         height: context.screenHeight(height: .2),
-        color: ColorName.mediumSeaGreen,
+        decoration: BoxDecoration(
+            color: ColorName.mediumSeaGreen,
+            borderRadius: BorderRadius.circular(10)),
         child: Center(
             child: Image.asset(
           Assets.images.logo.keyName,
-          width: 100,
-          height: 90,
+          width: context.screenWidht(width: .27),
+          height: context.screenHeight(height: .15),
           fit: BoxFit.cover,
         )),
       ),
