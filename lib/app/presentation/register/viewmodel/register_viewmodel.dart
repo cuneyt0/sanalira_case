@@ -73,8 +73,6 @@ abstract class _RegisterViewModelBase with Store {
 
   @action
   Future<void> saveUser() async {
-    print('${emailController?.text}');
-
     cacheManager?.saveLoginResponse(UserInfo(
       name: nameController?.text,
       lastName: lastNameController?.text,
