@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sanaliracase/app/getIt/get_it.dart';
+import 'package:sanaliracase/app/presentation/bank_list/view_model/bank_list_viewmodel.dart';
 import 'package:sanaliracase/app/presentation/component/text_component.dart';
 import 'package:sanaliracase/app/presentation/register/screen/register.dart';
 import 'package:sanaliracase/core/screen_size/screen_size_helper.dart';
@@ -10,6 +12,7 @@ class BankList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BankListViewModel _viewmodel = getIt.get<BankListViewModel>();
     return Scaffold(
       backgroundColor: ColorName.antiFlashWhite,
       body: Padding(
