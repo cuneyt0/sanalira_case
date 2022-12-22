@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sanaliracase/app/presentation/component/text_component.dart';
 import 'package:sanaliracase/app/presentation/register/screen/register.dart';
 import 'package:sanaliracase/core/screen_size/screen_size_helper.dart';
 import 'package:sanaliracase/gen/assets.gen.dart';
+import 'package:sanaliracase/gen/colors.gen.dart';
 
 class BankList extends StatelessWidget {
   const BankList({super.key});
@@ -9,6 +11,7 @@ class BankList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorName.antiFlashWhite,
       body: Padding(
         padding: const EdgeInsets.only(left: 15.0, top: 32, right: 15),
         child: ListView.separated(
@@ -28,7 +31,30 @@ class BankList extends StatelessWidget {
   List<Widget> _infoList(
     BuildContext context,
   ) =>
-      [_buttons(context)];
+      [_buttons(context), _userAccountMoney()];
+
+  Card _userAccountMoney() {
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundImage: AssetImage(Assets.images.maskGroup.path),
+        ),
+        title: TextComponent(
+          data: 'Türk Lirası',
+          color: ColorName.darkGunmetal,
+          fontWeight: FontWeight.w500,
+        ),
+        subtitle: TextComponent(
+          data: 'TL',
+          color: ColorName.lightSilver,
+        ),
+        trailing: TextComponent(
+          data: '234 ₺',
+          color: ColorName.darkGunmetal,
+        ),
+      ),
+    );
+  }
 
   Row _buttons(BuildContext context) {
     return Row(

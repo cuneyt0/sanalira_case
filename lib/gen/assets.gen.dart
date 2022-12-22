@@ -40,6 +40,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/maskGroup.png
+  AssetGenImage get maskGroup =>
+      const AssetGenImage('assets/images/maskGroup.png');
 }
 
 class Assets {
