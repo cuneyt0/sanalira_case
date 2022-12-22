@@ -9,6 +9,22 @@ part of 'register_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
+  late final _$cacheManagerAtom =
+      Atom(name: '_RegisterViewModelBase.cacheManager', context: context);
+
+  @override
+  CacheManager? get cacheManager {
+    _$cacheManagerAtom.reportRead();
+    return super.cacheManager;
+  }
+
+  @override
+  set cacheManager(CacheManager? value) {
+    _$cacheManagerAtom.reportWrite(value, super.cacheManager, () {
+      super.cacheManager = value;
+    });
+  }
+
   late final _$formKeyAtom =
       Atom(name: '_RegisterViewModelBase.formKey', context: context);
 
@@ -105,6 +121,46 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
     });
   }
 
+  late final _$saveUserResulStateAtom =
+      Atom(name: '_RegisterViewModelBase.saveUserResulState', context: context);
+
+  @override
+  ResultState<bool> get saveUserResulState {
+    _$saveUserResulStateAtom.reportRead();
+    return super.saveUserResulState;
+  }
+
+  @override
+  set saveUserResulState(ResultState<bool> value) {
+    _$saveUserResulStateAtom.reportWrite(value, super.saveUserResulState, () {
+      super.saveUserResulState = value;
+    });
+  }
+
+  late final _$userInformationAtom =
+      Atom(name: '_RegisterViewModelBase.userInformation', context: context);
+
+  @override
+  UserInfo? get userInformation {
+    _$userInformationAtom.reportRead();
+    return super.userInformation;
+  }
+
+  @override
+  set userInformation(UserInfo? value) {
+    _$userInformationAtom.reportWrite(value, super.userInformation, () {
+      super.userInformation = value;
+    });
+  }
+
+  late final _$saveUserAsyncAction =
+      AsyncAction('_RegisterViewModelBase.saveUser', context: context);
+
+  @override
+  Future<void> saveUser() {
+    return _$saveUserAsyncAction.run(() => super.saveUser());
+  }
+
   late final _$loginAsyncAction =
       AsyncAction('_RegisterViewModelBase.login', context: context);
 
@@ -152,12 +208,15 @@ mixin _$RegisterViewModel on _RegisterViewModelBase, Store {
   @override
   String toString() {
     return '''
+cacheManager: ${cacheManager},
 formKey: ${formKey},
 nameController: ${nameController},
 lastNameController: ${lastNameController},
 emailController: ${emailController},
 numberController: ${numberController},
-isSelected: ${isSelected}
+isSelected: ${isSelected},
+saveUserResulState: ${saveUserResulState},
+userInformation: ${userInformation}
     ''';
   }
 }

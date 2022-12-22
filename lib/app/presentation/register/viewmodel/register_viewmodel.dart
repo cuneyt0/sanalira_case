@@ -1,14 +1,19 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sanaliracase/app/data/local/model.dart/user_info.dart';
 import 'package:sanaliracase/app/presentation/bank_list/screen/bank_list.dart';
+import 'package:sanaliracase/core/cache/cache_manager.dart';
 import 'package:sanaliracase/core/navigation/navigation_helper.dart';
+import 'package:sanaliracase/core/results/result_state.dart';
 
 part 'register_viewmodel.g.dart';
 
 class RegisterViewModel = _RegisterViewModelBase with _$RegisterViewModel;
 
 abstract class _RegisterViewModelBase with Store {
+  @observable
+  CacheManager? cacheManager = CacheManager();
   @observable
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @observable
@@ -21,6 +26,10 @@ abstract class _RegisterViewModelBase with Store {
   TextEditingController? numberController = TextEditingController();
   @observable
   bool? isSelected = false;
+  @observable
+  ResultState<bool> saveUserResulState = const ResultState.initial();
+  @observable
+  UserInfo? userInformation = UserInfo();
 
   @action
   String? nameAndLastNameValidation(String value) {
@@ -59,11 +68,27 @@ abstract class _RegisterViewModelBase with Store {
   }
 
   @action
+  Future<void> saveUser() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    print('${emailController?.text}');
+
+    cacheManager?.saveLoginResponse(UserInfo(
+      name: nameController?.text,
+      lastName: lastNameController?.text,
+      email: emailController?.text,
+      number: numberController?.text,
+    ));
+
+    await Navigation.push(page: BankList());
+  }
+
+  @action
   Future<void> login() async {
     if (formKey.currentState != null &&
         formKey.currentState!.validate() &&
         isSelected == true) {
-      await Navigation.push(page: BankList());
+      await saveUser();
     } else {
       print('No');
     }

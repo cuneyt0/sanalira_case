@@ -33,6 +33,9 @@ dependencies:
     sdk: flutter
 
   freezed: ^1.1.1
+  freezed_annotation: ^1.1.0
+  json_serializable: ^6.0.0
+  json_annotation: ^4.4.0
   dio: ^4.0.6
   path_provider: ^2.0.11
   connectivity_plus: ^3.0.2
@@ -41,6 +44,9 @@ dependencies:
   build_runner:
   flutter_mobx: ^2.0.6+4
   mobx_codegen: ^2.0.4
+  #Local Storage
+  
+  shared_preferences: ^2.0.13
   
 
 

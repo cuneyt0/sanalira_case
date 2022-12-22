@@ -6,3 +6,4 @@ const lastNameText = 'Soyad';
 const emailText = 'E-Posta';
 const numberText = 'Cep Telefonu Numaranız';
 const login = 'Giriş Yap';
+const kullaniciBulunamadi = 'Kullanıcı Bulunamadı';
