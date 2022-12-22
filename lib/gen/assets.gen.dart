@@ -38,6 +38,22 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Rectangle_dot.png
+  AssetGenImage get rectangleDot =>
+      const AssetGenImage('assets/images/Rectangle_dot.png');
+
+  /// File path: assets/images/Vakifbank_logo.png
+  AssetGenImage get vakifbankLogo =>
+      const AssetGenImage('assets/images/Vakifbank_logo.png');
+
+  /// File path: assets/images/Ziraat_Bankasi_logo.png
+  AssetGenImage get ziraatBankasiLogo =>
+      const AssetGenImage('assets/images/Ziraat_Bankasi_logo.png');
+
+  /// File path: assets/images/albaraka.png
+  AssetGenImage get albaraka =>
+      const AssetGenImage('assets/images/albaraka.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 

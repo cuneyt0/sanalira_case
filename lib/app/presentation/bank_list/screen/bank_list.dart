@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:sanaliracase/app/data/remote/bank_list/model/bank_info.dart';
 import 'package:sanaliracase/app/getIt/get_it.dart';
 import 'package:sanaliracase/app/presentation/bank_list/view_model/bank_list_viewmodel.dart';
 import 'package:sanaliracase/app/presentation/component/text_component.dart';
@@ -7,38 +9,79 @@ import 'package:sanaliracase/core/screen_size/screen_size_helper.dart';
 import 'package:sanaliracase/gen/assets.gen.dart';
 import 'package:sanaliracase/gen/colors.gen.dart';
 
-class BankList extends StatelessWidget {
+class BankList extends StatefulWidget {
   const BankList({super.key});
 
   @override
+  State<BankList> createState() => _BankListState();
+}
+
+class _BankListState extends State<BankList> {
+  final BankListViewModel _viewmodel = getIt.get<BankListViewModel>();
+  @override
+  void initState() {
+    _viewmodel.getAssignment();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final BankListViewModel _viewmodel = getIt.get<BankListViewModel>();
     return Scaffold(
       backgroundColor: ColorName.antiFlashWhite,
       body: Padding(
         padding: const EdgeInsets.only(left: 15.0, top: 32, right: 15),
         child: ListView.separated(
-            itemBuilder: (context, index) => _infoList(
-                  context,
-                )[index],
+            itemBuilder: (context, index) =>
+                _infoList(context: context, viewModel: _viewmodel)[index],
             separatorBuilder: (context, index) => SizedBox(
                   height: context.screenHeight(height: 0.05),
                 ),
-            itemCount: _infoList(
-              context,
-            ).length),
+            itemCount:
+                _infoList(context: context, viewModel: _viewmodel).length),
       ),
     );
   }
 
   List<Widget> _infoList(
-    BuildContext context,
-  ) =>
+          {BuildContext? context, BankListViewModel? viewModel}) =>
       [
-        _buttons(context),
+        _buttons(context!),
         _userAccountMoney(),
         _liraText(),
+        SizedBox(
+          height: context.screenHeight(height: .5),
+          width: context.screenWidht(width: 1),
+          child: Observer(
+            builder: (context) => viewModel!.asignmentResultState.maybeWhen(
+              failed: (error) => _bankInfoList(viewModel: viewModel),
+              orElse: LinearProgressIndicator.new,
+              completed: (data) =>
+                  _bankInfoList(data: data, viewModel: viewModel),
+            ),
+          ),
+        ),
       ];
+
+  Widget _bankInfoList({
+    BankInfo? data,
+    required BankListViewModel? viewModel,
+  }) {
+    return ListView.builder(
+        itemCount: data?.data?.length,
+        itemBuilder: ((context, index) {
+          return Card(
+            child: ListTile(
+              title: TextComponent(
+                data: data?.data?[index]?.bankName,
+              ),
+              subtitle: TextComponent(
+                data: 'Havale / EFT ile para gönderin.',
+                color: ColorName.lightSilver,
+              ),
+            ),
+          );
+        }));
+  }
 
   TextComponent _liraText() {
     return TextComponent(
