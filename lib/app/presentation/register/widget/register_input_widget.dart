@@ -8,6 +8,7 @@ import 'package:sanaliracase/app/presentation/register/viewmodel/register_viewmo
 import 'package:sanaliracase/core/screen_size/screen_size_helper.dart';
 import 'package:sanaliracase/gen/assets.gen.dart';
 import 'package:sanaliracase/gen/colors.gen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Positioned registerInputWidget(
     BuildContext context, RegisterViewModel _viewModel) {
@@ -185,14 +186,12 @@ Column _contractText(RegisterViewModel _viewModel) {
                       text: textSpan2,
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
-                          //Bakılacak.
-                          /* var url =
-                                                        'https://www.google.com/';
-                                                    if (await canLaunch(url)) {
-                                                      await launch(url);
-                                                    } else {
-                                                      throw 'Sayfa geçersiz';
-                                                    }*/
+                          const url = "https://flutter.io";
+                          final uri = Uri.parse(url);
+                          if (await canLaunchUrl(uri))
+                            await launchUrl(uri);
+                          else
+                            throw "Could not launch $url";
                         },
                       style: TextStyle(
                           color: ColorName.iguanaGreen,
