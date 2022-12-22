@@ -15,3 +15,6 @@ const infoMessage =
     'Eksik bilgi girilmesi sebebiyle tutarın askıda kalması durumunda, ücret kesintisi yapılacaktır.';
 const description = 'Açıklama';
 const iban = 'IBAN';
+const textSpan1 = 'Hesabınızı olustururken ';
+const textSpan2 = 'sözleşme ve koşulları\n';
+const textSpan3 = 'kabul etmeniz gerekmektedir.';

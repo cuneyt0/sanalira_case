@@ -69,8 +69,6 @@ abstract class _RegisterViewModelBase with Store {
 
   @action
   Future<void> saveUser() async {
-    await Future.delayed(const Duration(seconds: 2));
-
     print('${emailController?.text}');
 
     cacheManager?.saveLoginResponse(UserInfo(
