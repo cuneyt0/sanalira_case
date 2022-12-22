@@ -26,6 +26,22 @@ mixin _$BankListViewModel on _BankListViewModelBase, Store {
     });
   }
 
+  late final _$currentIndexAtom =
+      Atom(name: '_BankListViewModelBase.currentIndex', context: context);
+
+  @override
+  int get currentIndex {
+    _$currentIndexAtom.reportRead();
+    return super.currentIndex;
+  }
+
+  @override
+  set currentIndex(int value) {
+    _$currentIndexAtom.reportWrite(value, super.currentIndex, () {
+      super.currentIndex = value;
+    });
+  }
+
   late final _$imagesAtom =
       Atom(name: '_BankListViewModelBase.images', context: context);
 
@@ -46,6 +62,7 @@ mixin _$BankListViewModel on _BankListViewModelBase, Store {
   String toString() {
     return '''
 asignmentResultState: ${asignmentResultState},
+currentIndex: ${currentIndex},
 images: ${images}
     ''';
   }

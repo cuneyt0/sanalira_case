@@ -19,6 +19,9 @@ class $AssetsColorGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Layer.png
+  AssetGenImage get layer => const AssetGenImage('assets/icons/Layer.png');
+
   /// File path: assets/icons/Rectangle.png
   AssetGenImage get rectangle =>
       const AssetGenImage('assets/icons/Rectangle.png');
@@ -33,6 +36,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/settings.png
   AssetGenImage get settings =>
       const AssetGenImage('assets/icons/settings.png');
+
+  /// File path: assets/icons/transaction.png
+  AssetGenImage get transaction =>
+      const AssetGenImage('assets/icons/transaction.png');
 }
 
 class $AssetsImagesGen {

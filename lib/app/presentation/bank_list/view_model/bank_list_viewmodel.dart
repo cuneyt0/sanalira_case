@@ -16,6 +16,8 @@ abstract class _BankListViewModelBase with Store {
   @observable
   ResultState<BankInfo> asignmentResultState = const ResultState.initial();
   @observable
+  int currentIndex = 0;
+  @observable
   List<String>? images = [
     Assets.images.albaraka.keyName,
     Assets.images.ziraatBankasiLogo.keyName,

@@ -20,6 +20,7 @@ class BankList extends StatefulWidget {
 
 class _BankListState extends State<BankList> {
   final BankListViewModel _viewmodel = getIt.get<BankListViewModel>();
+  int currentIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -29,6 +30,7 @@ class _BankListState extends State<BankList> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorName.antiFlashWhite,
+      bottomNavigationBar: _bottomNavigationBar(),
       body: Padding(
         padding: const EdgeInsets.only(left: 15.0, top: 32, right: 15),
         child: ListView.separated(
@@ -41,6 +43,65 @@ class _BankListState extends State<BankList> {
                 _infoList(context: context, viewModel: _viewmodel).length),
       ),
     );
+  }
+
+  Observer _bottomNavigationBar() {
+    return Observer(builder: (context) {
+      return BottomNavigationBar(
+          currentIndex: _viewmodel.currentIndex,
+          onTap: (index) => _viewmodel.currentIndex = index,
+          items: [
+            BottomNavigationBarItem(
+                label: '',
+                icon: Icon(
+                  Icons.home,
+                  color: _viewmodel.currentIndex == 0
+                      ? Colors.blue
+                      : ColorName.lightSilver,
+                )),
+            BottomNavigationBarItem(
+                label: '',
+                icon: Image.asset(Assets.icons.transaction.keyName,
+                    width: 20,
+                    height: 20,
+                    color: _viewmodel.currentIndex == 1
+                        ? Colors.blue
+                        : ColorName.lightSilver)),
+            BottomNavigationBarItem(
+                label: '',
+                icon: Container(
+                  height: context.screenHeight(height: .04),
+                  width: context.screenWidht(width: .1), // 44,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _viewmodel.currentIndex == 2
+                        ? ColorName.white
+                        : ColorName.darkGunmetal,
+                  ),
+                  alignment: Alignment.center, // This is needed
+                  child: Image.asset(
+                    Assets.icons.layer.keyName,
+                    color: _viewmodel.currentIndex == 2
+                        ? Colors.blue
+                        : ColorName.white,
+                    fit: BoxFit.contain,
+                    width: context.screenWidht(width: .05),
+                  ),
+                )),
+            BottomNavigationBarItem(
+                label: '',
+                icon: Icon(Icons.credit_card_sharp,
+                    color: _viewmodel.currentIndex == 3
+                        ? Colors.blue
+                        : ColorName.lightSilver)),
+            BottomNavigationBarItem(
+                label: '',
+                icon: Icon(Icons.person_outline,
+                    color: _viewmodel.currentIndex == 4
+                        ? Colors.blue
+                        : ColorName.lightSilver)),
+          ]);
+    });
   }
 
   List<Widget> _infoList(
