@@ -11,26 +11,15 @@ import 'package:sanaliracase/core/screen_size/screen_size_helper.dart';
 import 'package:sanaliracase/gen/assets.gen.dart';
 import 'package:sanaliracase/gen/colors.gen.dart';
 
-class BankList extends StatefulWidget {
+class BankList extends StatelessWidget {
   const BankList({super.key});
 
   @override
-  State<BankList> createState() => _BankListState();
-}
-
-class _BankListState extends State<BankList> {
-  final BankListViewModel _viewmodel = getIt.get<BankListViewModel>();
-  int currentIndex = 0;
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final BankListViewModel _viewmodel = getIt.get<BankListViewModel>();
     return Scaffold(
       backgroundColor: ColorName.antiFlashWhite,
-      bottomNavigationBar: _bottomNavigationBar(),
+      bottomNavigationBar: _bottomNavigationBar(_viewmodel),
       body: Padding(
         padding: const EdgeInsets.only(left: 15.0, top: 32, right: 15),
         child: ListView.separated(
@@ -45,7 +34,7 @@ class _BankListState extends State<BankList> {
     );
   }
 
-  Observer _bottomNavigationBar() {
+  Observer _bottomNavigationBar(BankListViewModel _viewmodel) {
     return Observer(builder: (context) {
       return BottomNavigationBar(
           currentIndex: _viewmodel.currentIndex,
@@ -71,14 +60,14 @@ class _BankListState extends State<BankList> {
                 label: '',
                 icon: Container(
                   height: context.screenHeight(height: .04),
-                  width: context.screenWidht(width: .1), // 44,
+                  width: context.screenWidht(width: .1),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: _viewmodel.currentIndex == 2
                         ? ColorName.white
                         : ColorName.darkGunmetal,
                   ),
-                  alignment: Alignment.center, // This is needed
+                  alignment: Alignment.center,
                   child: Image.asset(
                     Assets.icons.layer.keyName,
                     color: _viewmodel.currentIndex == 2
