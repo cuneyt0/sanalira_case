@@ -1,11 +1,10 @@
-// true
 import 'package:sanaliracase/core/network/network_builder.dart';
 
-bool? kApiReleaseMode = false;
+bool? kApiReleaseMode = true;
 
 class NetworkClient {
   static final NetworkClient instance = NetworkClient();
-  // FONKSYİON
+
   Future<NetworkManager> networkClient() async {
     return NetworkManager(
         'https://api.sanalira.com/', 'https://api.sanalira.com/',
