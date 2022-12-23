@@ -61,6 +61,7 @@ abstract class _BankListViewModelBase with Store {
     );
   }
 
+  @action
   Future<void> getAssignment() async {
     await Future.delayed(const Duration(milliseconds: 1000));
     asignmentResultState = const ResultState.loading();
