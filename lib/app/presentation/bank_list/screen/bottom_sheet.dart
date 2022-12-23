@@ -38,9 +38,10 @@ class BottomSheetScreen extends StatelessWidget {
               fontSize: 12,
               fontWeight: FontWeight.w300),
           subtitle: _copyTextField(
-              onPressed: () => CopyClipBoard.copy(
-                    data?.bankAccountName.toString(),
-                  )),
+            onPressed: () => CopyClipBoard.copy(
+              data?.bankAccountName.toString(),
+            ),
+          ),
         ),
         ListTile(
           title: TextComponent(
@@ -49,9 +50,10 @@ class BottomSheetScreen extends StatelessWidget {
               fontSize: 12,
               fontWeight: FontWeight.w300),
           subtitle: _copyTextField(
-              onPressed: () => CopyClipBoard.copy(
-                    data?.bankIban.toString(),
-                  )),
+            onPressed: () => CopyClipBoard.copy(
+              data?.bankIban.toString(),
+            ),
+          ),
         ),
         ListTile(
           title: TextComponent(
@@ -60,9 +62,10 @@ class BottomSheetScreen extends StatelessWidget {
               fontSize: 12,
               fontWeight: FontWeight.w300),
           subtitle: _copyTextField(
-              onPressed: () => CopyClipBoard.copy(
-                    data?.descriptionNo.toString(),
-                  )),
+            onPressed: () => CopyClipBoard.copy(
+              data?.descriptionNo.toString(),
+            ),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10.0, right: 10),
@@ -76,21 +79,23 @@ class BottomSheetScreen extends StatelessWidget {
 
   Card _secondInfoMessage() {
     return Card(
-        color: ColorName.snow,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: ListTile(
-          title: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                    text: infoMessage,
-                    style: TextStyle(color: ColorName.tartOrange)),
-              ],
-            ),
+      color: ColorName.snow,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: ListTile(
+        title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: infoMessage,
+                style: TextStyle(color: ColorName.tartOrange),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Card _firstInfoMessage() {
@@ -104,8 +109,9 @@ class BottomSheetScreen extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                  text: constantMessage,
-                  style: TextStyle(color: ColorName.lavenderGray)),
+                text: constantMessage,
+                style: TextStyle(color: ColorName.lavenderGray),
+              ),
             ],
           ),
         ),
@@ -131,10 +137,11 @@ class BottomSheetScreen extends StatelessWidget {
         filled: true,
         fillColor: ColorName.antiFlashWhite,
         border: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: ColorName.antiFlashWhite,
-            ),
-            borderRadius: BorderRadius.circular(5.0)),
+          borderSide: BorderSide(
+            color: ColorName.antiFlashWhite,
+          ),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: ColorName.antiFlashWhite,
