@@ -17,3 +17,5 @@ const iban = 'IBAN';
 const textSpan1 = 'Hesabınızı olustururken ';
 const textSpan2 = 'sözleşme ve koşulları\n';
 const textSpan3 = 'kabul etmeniz gerekmektedir.';
+const invalidNumberMessage = 'Geçersiz Telefon Numarası';
+const loginErrorMessage = 'Zorunlu alanları doldurunuz.';

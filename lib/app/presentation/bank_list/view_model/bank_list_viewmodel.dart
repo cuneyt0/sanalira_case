@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:mobx/mobx.dart';
 import 'package:sanaliracase/app/data/remote/bank_list/model/bank_info.dart';
 import 'package:sanaliracase/app/data/repository/bank_list/i_bank_repository.dart';
+import 'package:sanaliracase/app/routes/routes.dart';
 import 'package:sanaliracase/core/cache/cache_manager.dart';
+import 'package:sanaliracase/core/navigation/navigation_helper.dart';
 import 'package:sanaliracase/core/results/result_state.dart';
 import 'package:sanaliracase/gen/assets.gen.dart';
 
@@ -16,7 +20,7 @@ abstract class _BankListViewModelBase with Store {
 
   @observable
   ResultState<BankInfo> asignmentResultState = const ResultState.initial();
-  @observable
+
   @observable
   CacheManager? cacheManager = CacheManager();
   @observable
@@ -35,6 +39,26 @@ abstract class _BankListViewModelBase with Store {
   @action
   Future<void> logout() async {
     cacheManager?.logout();
+  }
+
+  @action
+  Future<void> hasLoggedInUser() async {
+    Timer(
+      const Duration(seconds: 2),
+      () async {
+        cacheManager?.getLoginResponse().then(
+          (loginRes) async {
+            if (loginRes == null) {
+              await Navigation.pushReplacementNamed(root: Routes.register);
+            } else {
+              await getAssignment();
+
+              await Navigation.pushNamedAndRemoveAll(root: Routes.bank_list);
+            }
+          },
+        );
+      },
+    );
   }
 
   Future<void> getAssignment() async {

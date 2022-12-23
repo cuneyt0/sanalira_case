@@ -82,6 +82,14 @@ mixin _$BankListViewModel on _BankListViewModelBase, Store {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 
+  late final _$hasLoggedInUserAsyncAction =
+      AsyncAction('_BankListViewModelBase.hasLoggedInUser', context: context);
+
+  @override
+  Future<void> hasLoggedInUser() {
+    return _$hasLoggedInUserAsyncAction.run(() => super.hasLoggedInUser());
+  }
+
   @override
   String toString() {
     return '''

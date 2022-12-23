@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sanaliracase/app/constant/app_string.dart';
 import 'package:sanaliracase/app/data/local/model.dart/user_info.dart';
 import 'package:sanaliracase/app/getIt/get_it.dart';
 import 'package:sanaliracase/app/presentation/bank_list/screen/bank_list.dart';
@@ -81,7 +82,7 @@ abstract class _RegisterViewModelBase with Store {
       number: numberController?.text,
     ));
     await _bankListViewModel.getAssignment();
-
+    await clear();
     await Navigation.push(page: BankList());
   }
 
@@ -92,7 +93,16 @@ abstract class _RegisterViewModelBase with Store {
         isSelected == true) {
       await saveUser();
     } else {
-      ToastMessage.showToast(showMessage: 'Zorunlu alanları doldurunuz.');
+      ToastMessage.showToast(showMessage: loginErrorMessage);
     }
+  }
+
+  @action
+  Future<void> clear() async {
+    nameController?.clear();
+    lastNameController?.clear();
+    emailController?.clear();
+    numberController?.clear();
+    isSelected = false;
   }
 }

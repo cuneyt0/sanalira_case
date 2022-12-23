@@ -132,7 +132,9 @@ Observer _loginButton(RegisterViewModel _viewModel) {
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorName.iguanaGreen,
           ),
-          onPressed: () => _viewModel.login(),
+          onPressed: () {
+            _viewModel.login();
+          },
         ),
       );
     },
@@ -245,9 +247,7 @@ IntlPhoneField _phoneField(RegisterViewModel _viewModel) {
       ),
     ),
     initialCountryCode: 'TR',
-    onChanged: (phone) {
-      print(phone.completeNumber);
-    },
+    invalidNumberMessage: invalidNumberMessage,
   );
 }
 
