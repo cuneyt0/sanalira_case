@@ -23,13 +23,13 @@ class BankList extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(left: 15.0, top: 32, right: 15),
         child: ListView.separated(
-            itemBuilder: (context, index) =>
-                _infoList(context: context, viewModel: _viewmodel)[index],
-            separatorBuilder: (context, index) => SizedBox(
-                  height: context.screenHeight(height: 0.05),
-                ),
-            itemCount:
-                _infoList(context: context, viewModel: _viewmodel).length),
+          itemBuilder: (context, index) =>
+              _infoList(context: context, viewModel: _viewmodel)[index],
+          separatorBuilder: (context, index) => SizedBox(
+            height: context.screenHeight(height: 0.05),
+          ),
+          itemCount: _infoList(context: context, viewModel: _viewmodel).length,
+        ),
       ),
     );
   }
@@ -135,15 +135,18 @@ class BankList extends StatelessWidget {
           child: ListTile(
             onTap: () {
               showModalBottomSheet(
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40.0),
-                          topRight: Radius.circular(40.0))),
-                  backgroundColor: Colors.white,
-                  builder: (context) => BottomSheetScreen(
-                        data: data?.data?[index],
-                      ));
+                context: context,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.0),
+                    topRight: Radius.circular(40.0),
+                  ),
+                ),
+                backgroundColor: Colors.white,
+                builder: (context) => BottomSheetScreen(
+                  data: data?.data?[index],
+                ),
+              );
             },
             leading: DottedBorder(
               borderType: BorderType.RRect,
@@ -152,16 +155,18 @@ class BankList extends StatelessWidget {
               color: ColorName.lightSilver,
               strokeWidth: 1,
               child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.contain,
-                        image: AssetImage(
-                          viewModel!.images![index],
-                        )),
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage(
+                      viewModel!.images![index],
+                    ),
                   ),
-                  child: Text('')),
+                ),
+                child: Text(''),
+              ),
             ),
             title: TextComponent(
               data: data?.data?[index]?.bankName,
@@ -187,7 +192,7 @@ class BankList extends StatelessWidget {
                         fit: BoxFit.fill,
                       ),
                     ),
-                  ))
+                  ),)
  */
   TextComponent _liraText() {
     return TextComponent(
@@ -232,7 +237,9 @@ class BankList extends StatelessWidget {
             onPressed: () async {
               viewModel?.logout();
               await Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => Splash()),
+                MaterialPageRoute(
+                  builder: (context) => Splash(),
+                ),
                 (Route<dynamic> route) => false,
               );
             }),
@@ -266,8 +273,9 @@ class BankList extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.all(10),
           backgroundColor: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
         ),
         onPressed: onPressed,
         label: Text(''),
